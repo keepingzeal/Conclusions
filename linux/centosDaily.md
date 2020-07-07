@@ -19,3 +19,7 @@
 
 - netstat -anp | grep 端口号
 
+#### 查看使用过的命令行
+
+history [ | grep xxx ]
+

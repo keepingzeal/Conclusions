@@ -11,10 +11,8 @@
          #firewall-cmd --zone= public --query-port=80/tcp
   关闭80访问权限
          #firewall-cmd --zone= public --remove-port=80/tcp --permanent
-  ————————————————
-  版权声明：本文为CSDN博主「LCYong_」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-  原文链接：https://blog.csdn.net/lcyong_/article/details/78928223
-
+  
+  
   
 
 -  其他命令操作 

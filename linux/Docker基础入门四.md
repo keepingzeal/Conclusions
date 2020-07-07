@@ -27,6 +27,6 @@
     #version是自定义版本名
   
   #推送镜像
-  docker push [pojectName:version]
+  docker push [username]/[pojectName:version]
   ```
   

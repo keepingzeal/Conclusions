@@ -1,0 +1,57 @@
+MySql远程连接无法打开解决办法
+
+##### 开启防火墙
+
+**1、改表法**。
+
+请使用mysql管理工具，如：SQLyog Enterprise、navicate mysql
+
+可能是你的帐号不允许从远程登陆，只能在localhost。这个时候只要在localhost的那台电脑使用mysql管理工具登入mysql后，更改 "mysql" 数据库里的 "user" 表里的 "host" 项，从"localhost"改称"%"
+
+
+**2、 授权法。**
+
+A:你想mysql账户myuser使用密码mypassword从任何主机连接到mysql服务器的话，那就在mySQL命令行下输入：
+GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'%' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
+
+若上面那条命令还没有奏效，那就使用下面的命令，一定成功!
+
+如果你想允许想mysql账户myuser从ip为192.168.1.3的主机连接到mysql服务器，并使用mypassword作为密码，那就在mySQL命令行下输入：
+
+GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'192.168.1.3' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
+
+
+
+**以下是其它网友的补充：**
+
+在远程主机上，我开启了mysql 服务，用 phpmyadmin 可以打开，比如说用户名为 root，密码为 123456。不过用 Mysql 客户端远程连接时却报了错误，比如 Mysql-Front 报了如下错误。
+
+?
+
+```
+Access denied ``for` `user` `‘root``'@'``121.42.8.33′(using ``password``:YES)
+```
+
+
+
+##### 解决办法1
+
+解决办法就是新建一个用户，比如TestUser
+然后再给TestUser授权远程访问，即：
+mysql>GRANT ALL PRIVILEGES ON *.* TO 'TestUser'@'%' IDENTIFIED BY '此处为TestUser的密码’' WITH GRANT OPTION;
+
+
+
+##### 解决办法2
+
+比较奇怪，phpmyadmin 可以正常访问，而 Mysql-Front 为什么无法连接呢？可能的原因，应该就是 IP 限制了，phpmyadmin在连接时使用的是localhost，而我们访问页面才使用的远程主机的 IP，而 Mysql-Front 连接的是远程主机。
+
+解决方法如下，我们需要新建一个用户，然后授予所有 IP 可以访问的权限就好啦。
+
+\#svn --username admin --password admin456 checkout svn://192.168.1.100/svnrepos /data/www/  --no-auth-cache
+
+通过执行以上语句，便创建了一个用户名为 username，密码为 password 的新账户，再用新账号登录，就可以连接成功啦。
+
+作者：所谓伊人_在水一方
+链接：http://www.imooc.com/article/44320
+来源：慕课网
