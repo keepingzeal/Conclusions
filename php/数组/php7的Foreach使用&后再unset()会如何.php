@@ -1,6 +1,6 @@
 <?php
 $arr = [1, 2, 3];
-foreach ($arr as $key => $val) {
+foreach ($arr as $key => &$val) {
     if ($val <= 2) {
     	unset($arr[$key]);
     }
