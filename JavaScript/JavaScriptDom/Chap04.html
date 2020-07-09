@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Snapshots</h1>
+    <ul>
+        <li>
+            <a href="image/home_page_a_1.png" title="A" >A</a>
+        </li>
+        <li>
+            <a href="image/home_page_a_2.png" title="B" >B</a>
+        </li>
+        <li>
+            <a href="image/home_page_a_3.png" title="C" >C</a>
+        </li>
+        <li>
+            <a href="image/home_page_a_4.png" title="D" >D</a>
+        </li>
+    </ul>
+    <img id="placeholder" src="image/home_page_a_1.png" alt="my img">
+<script>
+    function showPic(whichpic) {
+        whichpic.getAttribute('href')
+        var source = whichpic.getAttribute('href')
+        var placeholder = document.getElementById('placeholder')
+        placeholder.setAttribute('src', showPic)
+    }
+    
+</script>
+</body>
+</html>
