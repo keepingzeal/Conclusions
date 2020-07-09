@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+  // 封装基础
+  function Hula(){
+
+    // 给自己添加一个hello方法
+    Hula.prototype.helloInSide = function() {
+      console.log('hello self')
+    }
+
+    // 给自己添加第二个hello方法
+    Hula.prototype.helloOutside = function() {
+      console.log('hello out')
+    }
+
+    // 自己调用自己
+    Hula.prototype.helloUseSelf = function() {
+      Hula.prototype.helloInSide();
+    }
+
+  }
+
+  // 初始化对象
+  var HulaObj = new Hula();
+  HulaObj.helloOutside(); // 外部调用内部
+  HulaObj.helloUseSelf(); // 外部调用内部再调用内部
+
+
+</script>
+</body>
+</html>
