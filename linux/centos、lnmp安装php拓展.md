@@ -37,7 +37,7 @@
 
 - github/gitee等直接拉取swoole源码
 - 没有configure文件
-  - 在swoole目录下使用xxx(php目录)/bin/phpize生成
+  - 在swoole目录下使用xxx(php目录) /bin/phpize生成
   - 遇到的错误（1）
     - **生产configure报错** <u>*Cannot find autoconf*</u>  
     - **解决：** yum install autoconf 
