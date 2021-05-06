@@ -10,7 +10,7 @@
 // var_dump($options);
 
 
-// 斐波那契数列
+// 截取字符串
 // function str_split_cus($str, $len = 0)
 // {
 // 	if ($len > 0) {
@@ -24,6 +24,12 @@
 // 	return preg_split("//u", $str, -1, PREG_SPLIT_NO_EMPTY);;
 // }
 // var_dump(str_split_cus('截取字符.php'));
+
+// 斐波那契数列
+function test($n) {
+	if ($n<3) return $n;
+	return test($n-1) + test($n-2);
+}
 
 
 
