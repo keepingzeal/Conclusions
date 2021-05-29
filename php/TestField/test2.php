@@ -13,12 +13,21 @@
 // echo md5(implode('&', $data));
 
 
-$json = '[{"addr":"1","workday":["4","2"]},{"addr":"2","workday":["4","5","6"]}]';
-if (!$a = json_decode($json, true)) {
-} else {
-	$arr = array_flip(array_values($a[0]['workday']));
-}
+// $json = '[{"addr":"1","workday":["4","2"]},{"addr":"2","workday":["4","5","6"]}]';
+// if (!$a = json_decode($json, true)) {
+// } else {
+// 	$arr = array_flip(array_values($a[0]['workday']));
+// }
 
-$numberToDay = [1=>'一',2=>'二',3=>'三',4=>'四',5=>'五',6=>'六',7=>'日'];
+// $numberToDay = [1=>'一',2=>'二',3=>'三',4=>'四',5=>'五',6=>'六',7=>'日'];
 
-var_dump(array_intersect_key($numberToDay, $arr));
+// var_dump(array_intersect_key($numberToDay, $arr));
+
+
+
+$file = 'x.y.z.png';
+echo end(explode('.', $file));
+
+echo substr(strrchr($file, '.'), 1);
+echo pathinfo($file)['extension'];
+echo array_pop(explode('.', $file));

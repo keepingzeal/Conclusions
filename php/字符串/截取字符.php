@@ -1,4 +1,4 @@
 <?php
 $str = 'hello_world';
-
-echo substr($str, 2); // llo_world
+echo strlen($str);
+echo substr($str, 2); // ll o_world

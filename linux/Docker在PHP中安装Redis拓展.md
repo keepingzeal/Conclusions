@@ -17,3 +17,4 @@ docker-php-ext-install redis
 docker restart 【php容器名称】
 ```
 
+https://www.cnblogs.com/gaosf/p/11697726.html

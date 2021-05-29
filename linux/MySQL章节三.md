@@ -14,3 +14,19 @@
 Mysql有5中日志，redo和undo日志与事务有关
 ```
 
+#### 索引优化
+
+https://www.cnblogs.com/yyjie/p/7486975.html
+https://www.cnblogs.com/starcrm/p/12971702.html	
+
+#### explain详解
+
+https://www.cnblogs.com/tufujie/p/9413852.html
+
+#### 索引失效
+
+https://www.cnblogs.com/liehen2046/p/11052666.html
+
+#### 优化
+
+https://www.cnblogs.com/phpdragon/p/8231533.html
