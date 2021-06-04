@@ -4,6 +4,16 @@
 
 [php]: https://www.php.net/downloads.php
 
+https://www.cnblogs.com/yunfan1024/p/11316641.html
+
+编译安装
+https://zhuanlan.zhihu.com/p/113076311
+
+yum安装
+https://www.cnblogs.com/yiyaxuan/p/12652030.html
+https://zhuanlan.zhihu.com/p/63718766
+https://blog.csdn.net/qq_35145723/article/details/109811593
+https://segmentfault.com/a/1190000010334337
 
 
 ### php安装**四**部曲

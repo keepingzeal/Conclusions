@@ -40,3 +40,23 @@ netstat -tunple | grep 6379
 ./redis-cli -p 6379 shutdown
 ```
 
+#### 安装redis
+https://www.cnblogs.com/heqiuyong/p/10463334.html
+
+#### 安装redis拓展
+https://blog.csdn.net/liyyzz33/article/details/87881310
+
+wget http://pecl.php.net/get/redis-5.0.2.tgz
+
+tar -zxvf redis-5.0.2.tgz
+cd redis-5.0.2/
+
+/usr/local/php/bin/phpize
+
+./configure -with-php-config=/usr/local/php/bin/php-config
+
+make && make install
+
+vi /usr/local/php/lib/php.ini
+
+extension=redis.so

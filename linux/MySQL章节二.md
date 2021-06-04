@@ -1,5 +1,148 @@
 [TOC]
 
+#### 编译安装mysql
+
+```
+mkdir  /home/source  
+cd /home/source  
+wget https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.34.tar.gz
+	
+yum install -y cmake make gcc gcc-c++ wget ncurses-devel cmake make perl ncurses-devel openssl-devel bison-devel libaio libaio-devel
+
+mv /etc/my.cnf /etc/mysql.cof.back
+
+tar -zxvf mysql-5.7.34.tar.gz
+cd mysql-5.7.34/
+
+cmake \
+-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+-DCMAKE_INSTALL_PREFIX=/usr/local/web/mysql \
+-DMYSQL_UNIX_ADDR=/usr/local/web/mysql/mysql.sock \
+-DDEFAULT_CHARSET=utf8 \
+-DDEFAULT_COLLATION=utf8_general_ci \
+-DMYSQL_DATADIR=/home/mysql/data \
+-DSYSCONFDIR=/etc/my.cnf \
+-DWITH_MYISAM_STORAGE_ENGINE=1 \
+-DWITH_INNOBASE_STORAGE_ENGINE=1 \
+-DWITH_PARTITION_STORAGE_ENGINE=1 \
+-DENABLE_DEBUG_SYNC=0 \
+-DENABLED_LOCAL_INFILE=1 \
+-DENABLED_PROFILING=1 \
+-DMYSQL_TCP_PORT=3306 \
+-DWITH_DEBUG=0 \
+-DWITH_SSL=yes \
+-DDOWNLOAD_BOOST=1 \
+-DWITH_BOOST=/usr/local/boost_1_59_0
+
+----压缩版
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr/local/web/mysql -DMYSQL_UNIX_ADDR=/usr/local/web/mysql/mysql.sock -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DMYSQL_DATADIR=/home/mysql/data -DSYSCONFDIR=/etc/my.cnf -DWITH_MYISAM_STORAGE_ENGINE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DENABLE_DEBUG_SYNC=0 -DENABLED_LOCAL_INFILE=1 -DENABLED_PROFILING=1 -DMYSQL_TCP_PORT=3306 -DWITH_DEBUG=0 -DWITH_SSL=yes -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/usr/local/boost_1_59_0
+----压缩版
+
+make && make install
+
+
+cp /usr/local/web/mysql/support-files/mysql.server /etc/init.d/mysqld
+chmod +x /etc/init.d/mysqld
+ln -s /usr/local/web/mysql/bin/* /usr/local/bin/
+chkconfig --add mysqld
+chkconfig mysqld on
+
+cp /usr/local/mysql/support-files/my-default.cnf /etc/my.cnf
+没有的话自己创建
+
+vi /etc/my.cnf
+--------------------------my.cnf
+[mysqld]
+
+#skip-grant-tables
+
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES 
+
+# 一般配置选项
+basedir = /usr/local/web/mysql
+datadir = /home/mysql/data
+port = 3306
+socket = /home/mysql/mysqld.sock
+character-set-server=utf8
+
+
+#下面是可选项，要不要都行，如果出现启动错误，则全部注释掉，保留最基本的配置选项，然后尝试添加某些配置项后启动，检测配置项是否有误
+back_log = 300
+max_connections = 3000
+max_connect_errors = 50
+table_open_cache = 4096
+max_allowed_packet = 32M
+#binlog_cache_size = 4M
+
+max_heap_table_size = 128M
+read_rnd_buffer_size = 16M
+sort_buffer_size = 16M
+join_buffer_size = 16M
+thread_cache_size = 16
+query_cache_size = 128M
+query_cache_limit = 4M
+ft_min_word_len = 8
+
+thread_stack = 512K
+transaction_isolation = REPEATABLE-READ
+tmp_table_size = 128M
+#log-bin=mysql-bin
+long_query_time = 6
+
+
+server_id=1
+
+innodb_buffer_pool_size = 1G
+innodb_thread_concurrency = 16
+innodb_log_buffer_size = 16M
+
+
+innodb_log_file_size = 512M
+innodb_log_files_in_group = 3
+innodb_max_dirty_pages_pct = 90
+innodb_lock_wait_timeout = 120
+innodb_file_per_table = on
+
+[mysqldump]
+quick
+
+max_allowed_packet = 32M
+
+[mysql]
+no-auto-rehash
+default-character-set=utf8
+safe-updates
+
+[myisamchk]
+key_buffer = 16M
+sort_buffer_size = 16M
+read_buffer = 8M
+write_buffer = 8M
+
+[mysqlhotcopy]
+interactive-timeout
+
+[mysqld_safe]
+open-files-limit = 8192
+
+
+
+------------my.cnf
+
+
+mysqld --defaults-file=/etc/my.cnf --initialize --basedir=/usr/local/web/mysql --datadir=/home/mysql/data  --user=mysql
+
+
+flush privileges;
+set password for 'root'@'localhost'=password('bb123456.');
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'bb123456.' WITH GRANT OPTION;
+
+```
+
+服务器运行：iptables -L -n --line-numbers
+发现默认lnmp一键包关闭了3306端口，需要删除对应的DROP规则
+服务器运行：iptables -D INPUT 6
 
 
 #### 1、CentOS 7的yum更换为国内的阿里云yum源
