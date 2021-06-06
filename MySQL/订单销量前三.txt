@@ -1,0 +1,53 @@
+-- SELECT
+-- 	* 
+-- FROM
+-- 	mall_specs_value a
+-- WHERE
+-- 	(SELECT count(*) FROM mall_specs_value WHERE a.specs_id = specs_id and a.update_time<update_time) < 2
+-- order by a.specs_id, a.update_time desc;
+
+-- SELECT s.* FROM student_score s,
+-- 
+-- (SELECT SUBSTRING_INDEX(GROUP_CONCAT(name ORDER BY score DESC),",",3) as names
+-- 
+-- FROM student_score s GROUP BY class
+-- 
+-- ) as d
+-- 
+-- WHERE FIND_IN_SET(s.name,d.names) BETWEEN 1 AND 3
+-- 
+-- ORDER BY class,score desc;
+-- 
+-- 
+-- SELECT GROUP_CONCAT(name ORDER BY score DESC) as names
+-- 
+-- FROM student_score s GROUP BY class;
+
+-- SELECT *, GROUP_CONCAT(update_time ORDER BY update_time DESC) as names
+-- 
+-- FROM mall_specs_value s GROUP BY specs_id;
+-- 
+
+-- 单条订单销量前3
+-- SELECT a.* from mall_specs_value as a, (SELECT SUBSTRING_INDEX(GROUP_CONCAT( id ORDER BY update_time DESC ),',',3) AS ids FROM	mall_specs_value GROUP BY specs_id) as b where FIND_IN_SET(a.id,b.ids);
+
+
+-- 多条订单的总销量前3
+-- SELECT a.*, b.sums from mall_specs_value a,(
+-- SELECT
+-- 	*,SUBSTRING_INDEX(GROUP_CONCAT(id ORDER BY sum_ut DESC),',',3) as ids,
+-- 	SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS('-', id, sum_ut) ORDER BY sum_ut DESC),',',3) as sums
+-- FROM
+-- 	( SELECT *, sum( update_time ) AS sum_ut FROM mall_specs_value GROUP BY NAME, specs_id ) as a
+-- 	GROUP BY specs_id
+-- 	) b where FIND_IN_SET(a.id,b.ids);
+-- 	
+
+-- SELECT a.*, b.sums from mall_specs_value a,(
+-- SELECT
+-- 	*,SUBSTRING_INDEX(GROUP_CONCAT(id ORDER BY sum_ut DESC),',',3) as ids,
+-- 	SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS('-', id, sum_ut) ORDER BY sum_ut DESC),',',3) as sums
+-- FROM
+	( SELECT *, sum( update_time ) AS sum_ut FROM mall_specs_value GROUP BY NAME, specs_id ) as a
+	GROUP BY specs_id;
+	
