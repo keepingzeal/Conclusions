@@ -11,13 +11,13 @@ MySql远程连接无法打开解决办法
 **2、 授权法。**
 
 A:你想mysql账户myuser使用密码mypassword从任何主机连接到mysql服务器的话，那就在mySQL命令行下输入：
-GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'%' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON \*.\* TO 'myuser'@'%' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
 
 若上面那条命令还没有奏效，那就使用下面的命令，一定成功!
 
 如果你想允许想mysql账户myuser从ip为192.168.1.3的主机连接到mysql服务器，并使用mypassword作为密码，那就在mySQL命令行下输入：
 
-GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'192.168.1.3' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON \*.\* TO 'myuser'@'192.168.1.3' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
 
 
 
@@ -37,7 +37,7 @@ Access denied ``for` `user` `‘root``'@'``121.42.8.33′(using ``password``:YES
 
 解决办法就是新建一个用户，比如TestUser
 然后再给TestUser授权远程访问，即：
-mysql>GRANT ALL PRIVILEGES ON *.* TO 'TestUser'@'%' IDENTIFIED BY '此处为TestUser的密码’' WITH GRANT OPTION;
+mysql>GRANT ALL PRIVILEGES ON \*.\* TO 'TestUser'@'%' IDENTIFIED BY '此处为TestUser的密码’' WITH GRANT OPTION;
 
 iptables -L -n --line-numbers # 查看已有的iptables规则
 
